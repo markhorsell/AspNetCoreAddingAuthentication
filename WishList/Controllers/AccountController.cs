@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -10,6 +11,17 @@ using WishList.Models.AccountViewModels;
 
 namespace WishList.Controllers
 {
+
+    public class Connection
+    {
+        public SqlConnection sqlConnection { get; set; }
+
+        public Connection()
+        {
+            //"Server=127.0.0.1;Port=3306;Database=testdb;Uid=sa;Pwd = admin;" //keyword not supported post
+            //sqlConnection = new SqlConnection("Server=127.0.0.1;port=3306;Database=testdb;Uid=sa;Pwd=admin;");
+        }
+    }
     [Authorize]
     public class AccountController : Controller
     {
@@ -25,6 +37,25 @@ namespace WishList.Controllers
         [AllowAnonymous]
         public IActionResult Register()
         {
+            /*
+            Console.WriteLine("Register HttpGet");
+            using (SqlConnection test = new Connection().sqlConnection)
+            {
+                try
+                {
+                    test.Open();
+                    SqlCommand sqlCommand = new SqlCommand("select * from user", test);
+                    sqlCommand.ExecuteNonQuery();
+                }
+                catch
+                {
+                    Console.WriteLine("unable to open db");
+                }
+            }
+            */
+            
+                
+               
             return View();
         }
         [HttpPost]

@@ -15,7 +15,11 @@ namespace WishList
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("Wishlist"));
+
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("WishlistAnyName"));
+            var connection = @"Server=127.0.0.1;port=3306;Database=testdb;Uid=sa;Pwd=admin;";
+
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection));
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
         }
 
